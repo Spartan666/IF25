@@ -2,13 +2,14 @@ package modele;
 
 public class Video {
 	
-	int nb_vues;
+	private int nbVues;
+	private int ageRequis;
+	private String titre;
+	private String description;
+	private int nbLikes;
+	private int nbDislikes;
+	private int nbCommentaires;
 	
-	public Video(){
-		nb_vues=0;
-	}
 	
-	public void Visionner(){
-		nb_vues=+1;
-	}
+	
 }
