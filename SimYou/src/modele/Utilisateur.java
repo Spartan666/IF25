@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import madkit.kernel.Agent;
 import madkit.kernel.Message;
-
+import comportement.Comportement;
 
 public class Utilisateur extends Agent{
 	
@@ -19,14 +19,22 @@ public class Utilisateur extends Agent{
 	private ArrayList<Chaine> abonnementsChaines;
 
 	
-	public Utilisateur(String nom, String prenom,ArrayList<String> centres_interet, String comportement){
+	public Utilisateur(String nom, String prenom,ArrayList<String> centres_interet, Comportement comportement){
 		chaine=new Chaine(this);
 		nom=nom;
 		prenom=prenom;
 		centres_interet=centres_interet;
 		comportement=comportement;
 	}
+	
+	public Chaine getChaine() {
+		return chaine;
+	}
 
+	public void mettrePause(int duree) {
+		pause(duree);
+	}
+	
 	public void activate() {
 		logger.info("Je me connecte");
 		pause(2000);
@@ -46,7 +54,4 @@ public class Utilisateur extends Agent{
 		System.out.println("Je me deconnecte");
 	}
 	
-	public void Visionner(){
-		
-	}
 }

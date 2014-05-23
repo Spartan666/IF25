@@ -9,7 +9,10 @@ public class Video {
 	private int nbLikes;
 	private int nbDislikes;
 	private int nbCommentaires;
+	private int duree;
 	
-	
+	public int getDuree() {
+		return duree;
+	}
 	
 }
