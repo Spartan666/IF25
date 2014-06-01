@@ -16,7 +16,7 @@ public class Chaine {
 		return videos;
 	}
 	
-	public void addVideos(Video video){
+	public void addVideo(Video video){
 		videos.add(video);
 	}
 	

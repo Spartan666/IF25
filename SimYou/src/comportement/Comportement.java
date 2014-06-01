@@ -28,7 +28,7 @@ public class Comportement {
 		ArrayList<Video> videos = proprietaire.getChaine().getVideos();
 		index = new Random().nextInt(videos.size());
 		Video videoVisionnee = videos.get(index);
-		
+		visionneur.getAgentLogger().info("Visionne une vidéo");
 		visionneur.mettrePause(videoVisionnee.getDuree());
 		int proba = new Random().nextInt(100);
 		if (proba <= probaLike) {

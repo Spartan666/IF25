@@ -2,6 +2,7 @@ package modele;
 import java.util.ArrayList;
 
 import madkit.kernel.Agent;
+import madkit.kernel.AgentLogger;
 import madkit.kernel.Message;
 import comportement.Comportement;
 
@@ -30,6 +31,10 @@ public class Utilisateur extends Agent{
 	public Chaine getChaine() {
 		return chaine;
 	}
+	
+	public AgentLogger getAgentLogger() {
+		return logger;
+	}
 
 	public void mettrePause(int duree) {
 		pause(duree);
@@ -44,7 +49,7 @@ public class Utilisateur extends Agent{
 		// TODO Auto-generated method stub
 		while(true){
 			pause(1000);
-			chaine.getVideos().add(new Video());
+			chaine.getVideos().add(new Video("test", "test", 60));
 			logger.info("nouvelle video");
 		}
 	}
