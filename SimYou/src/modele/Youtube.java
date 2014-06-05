@@ -3,7 +3,7 @@ package modele;
 import java.util.ArrayList;
 
 import comportement.Comportement;
-
+import comportement.ComportementPosteur;
 import madkit.gui.menu.LaunchAgentsMenu;
 import madkit.kernel.Agent;
 import madkit.kernel.Madkit;
@@ -14,7 +14,7 @@ public class Youtube {
 	/**
 	 * @param args
 	 */
-	private ArrayList<Utilisateur> utilisateurs;
+	private ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 	
 	public Youtube(){
 	}
@@ -23,11 +23,17 @@ public class Youtube {
 		return utilisateurs;
 	}
 	
+	public void addUtilisateur(Utilisateur utilisateur) {
+		this.utilisateurs.add(utilisateur);
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Utilisateur U=new Utilisateur("Joe","Mobile",null, new Comportement(10, 10, 10, 10));
+		Youtube youtube = new Youtube();
+		Utilisateur U = new Utilisateur("Mobile", "Joe", null, new ComportementPosteur(10, 10, 10, 10, 1));
+		youtube.addUtilisateur(U);
 		U.activate();
-		U.live();
+		U.live(youtube);
 		
 	}
 

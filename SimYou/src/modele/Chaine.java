@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class Chaine {
 	
-	private ArrayList<Video> videos=new ArrayList<Video>();
-	private ArrayList<Utilisateur> abonnes= new ArrayList<Utilisateur>();
-	private Utilisateur proprietaire;
+	private ArrayList<Video> videos = new ArrayList<Video>();
+	private ArrayList<Utilisateur> abonnes = new ArrayList<Utilisateur>();
 	
-	public Chaine(Utilisateur proprietaire){
-		proprietaire=proprietaire;
+	public Chaine(){
 	}
 	
 	public ArrayList<Video> getVideos(){
@@ -17,7 +15,15 @@ public class Chaine {
 	}
 	
 	public void addVideo(Video video){
-		videos.add(video);
+		this.videos.add(video);
+	}
+
+	public ArrayList<Utilisateur> getAbonnes() {
+		return abonnes;
+	}
+
+	public void addAbonne (Utilisateur utilisateur) {
+		this.abonnes.add(utilisateur);
 	}
 	
 }
