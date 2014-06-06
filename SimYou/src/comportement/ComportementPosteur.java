@@ -12,10 +12,10 @@ public class ComportementPosteur extends Comportement {
 	private int periodicitePostage; //Valeur entre 1 (postage pour chaque visionnage) et 10 (postage pour 10 visionnages)
 	
 	public ComportementPosteur(int probaLike, int probaDislike,
-			int probaCommenter, int probaAbonner, int frequencePostage) {
-		super(probaLike, probaDislike, probaCommenter, probaAbonner);
-		if (frequencePostage < 11) { 
-			if (frequencePostage > 0) {
+			int probaCommenter, int probaAbonner, int bonusProbaCommenter, int frequencePostage) {
+		super(probaLike, probaDislike, probaCommenter, bonusProbaCommenter, probaAbonner);
+		if (frequencePostage <= 10) { 
+			if (frequencePostage >= 1) {
 				this.periodicitePostage = frequencePostage;
 			}
 			else {
@@ -28,10 +28,10 @@ public class ComportementPosteur extends Comportement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void visionner(Utilisateur utilisateur, Youtube youtube) {
+	public void selectionnerVideo(Utilisateur utilisateur, Youtube youtube) {
 		poster(utilisateur);
 		for (int i = 1; i <= periodicitePostage; i++) {
-			super.visionner(utilisateur, youtube);
+			super.selectionnerVideo(utilisateur, youtube);
 		}
 	}
 	

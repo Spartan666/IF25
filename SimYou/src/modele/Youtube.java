@@ -30,7 +30,7 @@ public class Youtube {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Youtube youtube = new Youtube();
-		Utilisateur U = new Utilisateur("Mobile", "Joe", null, new ComportementPosteur(10, 10, 10, 10, 1));
+		Utilisateur U = new Utilisateur("Mobile", "Joe", null, new ComportementPosteur(10, 10, 10, 10, 10, 1));
 		youtube.addUtilisateur(U);
 		U.activate();
 		U.live(youtube);

@@ -104,7 +104,7 @@ public class Utilisateur extends Agent{
 	public void live(Youtube youtube) {
 		// TODO Auto-generated method stub
 		while(true){
-			this.comportement.visionner(this, youtube);
+			this.comportement.selectionnerVideo(this, youtube);
 		}
 	}
 	
