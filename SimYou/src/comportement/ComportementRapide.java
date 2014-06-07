@@ -17,7 +17,7 @@ public class ComportementRapide extends Comportement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void selectionnerVideo(Utilisateur utilisateur, Youtube youtube) {
+	public void selectionnerVideo(Utilisateur visionneur, Youtube youtube) {
 		ArrayList<Utilisateur> utilisateurs = youtube.getUtilisateurs();	//Récupération des utilisateurs
 		
 		Iterator<Utilisateur> iteratorU = utilisateurs.iterator();
@@ -32,15 +32,33 @@ public class ComportementRapide extends Comportement {
 			videos.addAll(iteratorC.next().getVideos());		//Récupération des videos
 		}
 		
+		Iterator<Video> iteratorV = videos.iterator();
 		int test = new Random().nextInt(100);
+		Video videoVisionnee = videos.get(0);
+		
+		//Test si sélection par nombre de vues ou de likes
 		if (test <= 50) {
-			
+			int maxNbVues = 0;
+			while (iteratorV.hasNext()) {
+				Video videoActuelle = iteratorV.next();
+				if (videoActuelle.getNbVues() > maxNbVues) {
+					maxNbVues = videoActuelle.getNbVues();
+					videoVisionnee = videoActuelle;
+				}
+			}
 		}
 		else {
-			
+			int maxNbLikes = 0;
+			while (iteratorV.hasNext()) {
+				Video videoActuelle = iteratorV.next();
+				if (videoActuelle.getNbLikes() > maxNbLikes) {
+					maxNbLikes = videoActuelle.getNbLikes();
+					videoVisionnee = videoActuelle;
+				}
+			}
 		}
 
-		//visionner(utilisateur, videoVisionnee, chaine);
+		visionner(visionneur, videoVisionnee, videoVisionnee.getChaine());
 		
 	}
 }

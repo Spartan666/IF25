@@ -38,7 +38,7 @@ public class ComportementPosteur extends Comportement {
 	public void poster(Utilisateur utilisateur) {
 		Chaine chaine = utilisateur.getChaine();	//Postage d'une video de durée entre 30s et 1h
 		int duree = new Random().nextInt(3570) + 30;
-		Video video = new Video("video" + chaine.getVideos().size() + utilisateur.getPrenom() + utilisateur.getNom(), "Blabla", duree, null); //Création de la video
+		Video video = new Video("video" + chaine.getVideos().size() + utilisateur.getPrenom() + utilisateur.getNom(), "Blabla", duree, null, chaine); //Création de la video
 		chaine.addVideo(video);
 		utilisateur.getAgentLogger().info("Video postee : " + video.getTitre() + " " + video.getDuree() + "s");
 	}
