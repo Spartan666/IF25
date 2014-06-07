@@ -18,6 +18,8 @@ public class Utilisateur extends Agent{
 	private ArrayList<Video> dislikedVideos = new ArrayList<Video>();
 	private ArrayList<Video> videosCommentees = new ArrayList<Video>();
 	private ArrayList<Chaine> abonnementsChaines = new ArrayList<Chaine>();
+	
+	public static Youtube youtube;
 
 	
 	public Utilisateur(String nom, String prenom, ArrayList<String> centresInteret, Comportement comportement){
@@ -101,7 +103,7 @@ public class Utilisateur extends Agent{
 		pause(2000);
 	}
 	
-	public void live(Youtube youtube) {
+	public void live() {
 		// TODO Auto-generated method stub
 		while(true){
 			this.comportement.selectionnerVideo(this, youtube);

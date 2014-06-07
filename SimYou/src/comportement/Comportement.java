@@ -8,7 +8,7 @@ import modele.Utilisateur;
 import modele.Video;
 import modele.Youtube;
 
-public class Comportement {
+public class Comportement extends Thread {
 	
 	private int probaVote;
 	private int probaLike;
@@ -87,14 +87,18 @@ public class Comportement {
 		
 		Chaine chaine = proprietaire.getChaine();		//Récupération de la chaîne
 		ArrayList<Video> videos = chaine.getVideos();	//Sélection d'une video aléatoire
-		index = new Random().nextInt(videos.size());
-		Video videoVisionnee = videos.get(index);
-		visionner(visionneur, videoVisionnee, chaine);
-
+		if (videos.size() != 0) {
+			index = new Random().nextInt(videos.size());
+			Video videoVisionnee = videos.get(index);
+			visionner(visionneur, videoVisionnee, chaine);
+		}
+		else {
+			selectionnerVideo(visionneur, youtube);
+		}
 	}
 	
 	public void visionner(Utilisateur visionneur, Video video, Chaine chaine) {
-		visionneur.getAgentLogger().info("Visionne une vidéo : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
+		visionneur.getAgentLogger().info("Visionne une video : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
 		visionneur.mettrePause(video.getDuree());
 		int proba = new Random().nextInt(100);
 		
@@ -145,24 +149,24 @@ public class Comportement {
 	public void liker(Utilisateur visionneur, Video video) {
 		video.addLike();
 		visionneur.addLikedVideo(video);
-		visionneur.getAgentLogger().info("Video likée");
+		visionneur.getAgentLogger().info("Video likee");
 	}
 	
 	public void disliker(Utilisateur visionneur, Video video) {
 		video.addDislike();
 		visionneur.addDislikedVideo(video);
-		visionneur.getAgentLogger().info("Video dislikée");
+		visionneur.getAgentLogger().info("Video dislikee");
 	}
 
 	public void commenter(Utilisateur visionneur, Video video) {
 		video.addCommentaire();
 		visionneur.addVideoCommentee(video);
-		visionneur.getAgentLogger().info("Video commentée");
+		visionneur.getAgentLogger().info("Video commentee");
 	}
 	
 	public void abonner(Utilisateur visionneur, Chaine chaine) {
 		chaine.addAbonne(visionneur);
 		visionneur.addAbonnementChaine(chaine);
-		visionneur.getAgentLogger().info("Abonné à la chaîne");
+		visionneur.getAgentLogger().info("Abonnement a la chaine");
 	}
 }

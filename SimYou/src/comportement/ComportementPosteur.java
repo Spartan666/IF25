@@ -40,7 +40,7 @@ public class ComportementPosteur extends Comportement {
 		int duree = new Random().nextInt(3570) + 30;
 		Video video = new Video("video" + chaine.getVideos().size() + utilisateur.getPrenom() + utilisateur.getNom(), "Blabla", duree, null); //Création de la video
 		chaine.addVideo(video);
-		utilisateur.getAgentLogger().info("Video postée : " + video.getTitre() + " " + video.getDuree() + "s");
+		utilisateur.getAgentLogger().info("Video postee : " + video.getTitre() + " " + video.getDuree() + "s");
 	}
 	
 }

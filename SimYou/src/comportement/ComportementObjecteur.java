@@ -8,7 +8,7 @@ public class ComportementObjecteur extends Comportement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void visionner() {
+	public void selectionnerVideo() {
 		
 		
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import comportement.Comportement;
 import comportement.ComportementPosteur;
+import madkit.action.KernelAction;
 import madkit.gui.menu.LaunchAgentsMenu;
 import madkit.kernel.Agent;
 import madkit.kernel.Madkit;
@@ -29,12 +30,18 @@ public class Youtube {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		Youtube youtube = new Youtube();
-		Utilisateur U = new Utilisateur("Mobile", "Joe", null, new ComportementPosteur(10, 10, 10, 10, 10, 1));
-		youtube.addUtilisateur(U);
-		U.activate();
-		U.live(youtube);
-		
+		Utilisateur.youtube = youtube;
+		Utilisateur U1 = new Utilisateur("Mobile", "Joe", null, new ComportementPosteur(10, 10, 10, 10, 10, 1));
+		Utilisateur U2 = new Utilisateur("Smith", "Will", null, new ComportementPosteur(10, 10, 10, 10, 10, 1));
+		youtube.addUtilisateur(U1);
+		youtube.addUtilisateur(U2);
+
+		Madkit m = new Madkit();
+		m.doAction(KernelAction.LAUNCH_AGENT, U1, true);
+		m.doAction(KernelAction.LAUNCH_AGENT, U2, true);
+
 	}
 
 }
