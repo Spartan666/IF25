@@ -25,35 +25,41 @@ public class Youtube {
 	private ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 	
 	public Youtube(Controleur controleur, Fenetre fenetre,ArrayList<Integer> confPosteur){
+		Utilisateur.youtube=this;
 		 Madkit m = new Madkit();
 		 
 		 //ConfPosteur
 		for(int i=0;i<confPosteur.get(0);i++){
-			Utilisateur U = new Utilisateur("Mobile"+i, "Joe", null, new ComportementPosteur(confPosteur.get(1),confPosteur.get(2),confPosteur.get(3),confPosteur.get(4),confPosteur.get(5), confPosteur.get(6)));
+			Utilisateur U = new Utilisateur("Posteur"+i, "Joe", null, new ComportementPosteur(confPosteur.get(1),confPosteur.get(2),confPosteur.get(3),confPosteur.get(4),confPosteur.get(5), confPosteur.get(6)));
+			U.setName("Posteur"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
 		//ConfFan
 		for(int i=0;i<confPosteur.get(7);i++){
 			Utilisateur U = new Utilisateur("Fan"+i, "Joe", null, new ComportementFan(confPosteur.get(8),confPosteur.get(9),confPosteur.get(10),confPosteur.get(11),confPosteur.get(12)));
+			U.setName("Fan"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
 		//ConfObjecteur
 		for(int i=0;i<confPosteur.get(13);i++){
 			Utilisateur U = new Utilisateur("Objecteur"+i, "Joe", null, new ComportementObjecteur(confPosteur.get(14),confPosteur.get(15),confPosteur.get(16),confPosteur.get(17),confPosteur.get(18)));
+			U.setName("Objecteur"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
 		//ConfRapide
 		for(int i=0;i<confPosteur.get(19);i++){
 			Utilisateur U = new Utilisateur("Rapide"+i, "Joe", null, new ComportementRapide(confPosteur.get(20),confPosteur.get(21),confPosteur.get(22),confPosteur.get(23),confPosteur.get(24)));
+			U.setName("Rapide"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
 		//ConfSuiveur
 		for(int i=0;i<confPosteur.get(25);i++){
 			Utilisateur U = new Utilisateur("Suiveur"+i, "Joe", null, new ComportementSuiveur(confPosteur.get(26),confPosteur.get(27),confPosteur.get(28),confPosteur.get(29),confPosteur.get(30)));
+			U.setName("Suiveur"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
