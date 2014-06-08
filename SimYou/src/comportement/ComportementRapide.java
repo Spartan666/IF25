@@ -34,7 +34,8 @@ public class ComportementRapide extends Comportement {
 		
 		Iterator<Video> iteratorV = videos.iterator();
 		int test = new Random().nextInt(100);
-		Video videoVisionnee = videos.get(0);
+		int index = new Random().nextInt(videos.size());
+		Video videoVisionnee = videos.get(index);		//Initialisation avec vidéo aléatoire si toutes les vidéos sont déjà vues.
 		
 		//Test si sélection par nombre de vues ou de likes
 		if (test <= 50) {
@@ -43,7 +44,10 @@ public class ComportementRapide extends Comportement {
 				Video videoActuelle = iteratorV.next();
 				if (videoActuelle.getNbVues() > maxNbVues) {
 					maxNbVues = videoActuelle.getNbVues();
-					videoVisionnee = videoActuelle;
+					//Test si vidéo pas encore vue
+					if (!visionneur.getVideosVues().contains(videoActuelle)) {	
+						videoVisionnee = videoActuelle;
+					}
 				}
 			}
 		}
@@ -53,7 +57,10 @@ public class ComportementRapide extends Comportement {
 				Video videoActuelle = iteratorV.next();
 				if (videoActuelle.getNbLikes() > maxNbLikes) {
 					maxNbLikes = videoActuelle.getNbLikes();
-					videoVisionnee = videoActuelle;
+					//Test si vidéo pas encore vue
+					if (!visionneur.getVideosVues().contains(videoActuelle)) {	
+						videoVisionnee = videoActuelle;
+					}
 				}
 			}
 		}

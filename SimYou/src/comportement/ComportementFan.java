@@ -18,17 +18,20 @@ public class ComportementFan extends Comportement {
 
 	public void selectionnerVideo(Utilisateur visionneur, Youtube youtube) {
 		ArrayList<Chaine> chainesAbonnees = visionneur.getAbonnementsChaines();
-		if (chainesAbonnees.size() != 0) {
-			int index = new Random().nextInt(chainesAbonnees.size());
+		//Test si abonné à une ou plusieurs chaînes
+		if (chainesAbonnees.size() != 0) {	
+			int index = new Random().nextInt(chainesAbonnees.size());	//Sélection d'une chaîne aléatoire.
 			Chaine chaine = chainesAbonnees.get(index);
-			ArrayList<Video> videos = chaine.getVideos();
-			if (videos.size() != 0) {
-				index = new Random().nextInt(videos.size());
-				Video videoVisionnee = videos.get(index);
-				visionner(visionneur, videoVisionnee, chaine);
-			}
+			
+			ArrayList<Video> videos = chaine.getVideos();	//Sélection d'une vidéo aléatoire
+			index = new Random().nextInt(videos.size());
+			Video videoVisionnee = videos.get(index);
+			
+			visionner(visionneur, videoVisionnee, chaine);
+
 		}
-		else {
+		//Sinon comportement lambda
+		else {	
 			super.selectionnerVideo(visionneur, youtube);
 		}
 	}
