@@ -98,52 +98,58 @@ public class Comportement extends Thread {
 	}
 	
 	public void visionner(Utilisateur visionneur, Video video, Chaine chaine) {
-		visionneur.getAgentLogger().info("Visionne une video : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
-		visionneur.mettrePause(video.getDuree());
-		int proba = new Random().nextInt(100);
-		
-		//Test probabilité de voter
-		if (proba <= probaVote) {
-			proba = new Random().nextInt(100);
-			//Test probabilité de liker
-			if (proba <= probaLike) {
-				liker(visionneur, video);
-				//Test probabilité de commenter
+		//Test si le visionneur a l'age requis
+		if (visionneur.getAge() >= video.getAgeRequis()) {
+			visionneur.getAgentLogger().info("Visionne une video : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
+			visionneur.mettrePause(video.getDuree());
+			int proba = new Random().nextInt(100);
+			
+			//Test probabilité de voter
+			if (proba <= probaVote) {
 				proba = new Random().nextInt(100);
-				int probaBonus = new Random().nextInt(25);
-				proba += probaBonus;
-				if (proba <= probaCommenter + bonusProbaCommenter) {
-					commenter(visionneur, video);
+				//Test probabilité de liker
+				if (proba <= probaLike) {
+					liker(visionneur, video);
+					//Test probabilité de commenter
+					proba = new Random().nextInt(100);
+					int probaBonus = new Random().nextInt(25);
+					proba += probaBonus;
+					if (proba <= probaCommenter + bonusProbaCommenter) {
+						commenter(visionneur, video);
+					}
+					//Test probabilité de s'abonner à la chaîne
+					proba = new Random().nextInt(100);
+					if (proba <= probaAbonner) {
+						abonner(visionneur, chaine);
+					}
 				}
-				//Test probabilité de s'abonner à la chaîne
-				proba = new Random().nextInt(100);
-				if (proba <= probaAbonner) {
-					abonner(visionneur, chaine);
+				//Sinon dislike
+				else {
+					//Test probabilité de commenter
+					proba = new Random().nextInt(100);
+					int probaBonus = new Random().nextInt(25);
+					proba += probaBonus;
+					if (proba <= probaCommenter + bonusProbaCommenter) {
+						commenter(visionneur, video);
+					}
+					disliker(visionneur, video);
 				}
 			}
-			//Sinon dislike
 			else {
 				//Test probabilité de commenter
 				proba = new Random().nextInt(100);
-				int probaBonus = new Random().nextInt(25);
-				proba += probaBonus;
-				if (proba <= probaCommenter + bonusProbaCommenter) {
+				if (proba <= probaCommenter) {
 					commenter(visionneur, video);
 				}
-				disliker(visionneur, video);
 			}
+	
+			visionneur.mettrePause(1000);		
+			video.addVue();
+			visionneur.addVideoVue(video); //Ajoute la video à la liste des videos vues
 		}
 		else {
-			//Test probabilité de commenter
-			proba = new Random().nextInt(100);
-			if (proba <= probaCommenter) {
-				commenter(visionneur, video);
-			}
+			visionneur.getAgentLogger().info("Trop jeune pour la video");
 		}
-
-		visionneur.mettrePause(1000);		
-		video.addVue();
-		visionneur.addVideoVue(video); //Ajoute la video à la liste des videos vues
 	}
 	
 	public void liker(Utilisateur visionneur, Video video) {
