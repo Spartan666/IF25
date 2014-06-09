@@ -11,6 +11,7 @@ public class Utilisateur extends Agent{
 	private Chaine chaine;
 	private String nom;
 	private String prenom;
+	private int age;
 	private ArrayList<String> centresInteret;
 	private Comportement comportement;
 	private ArrayList<Video> videosVues = new ArrayList<Video>();
@@ -22,10 +23,11 @@ public class Utilisateur extends Agent{
 	public static Youtube youtube;
 
 	
-	public Utilisateur(String nom, String prenom, ArrayList<String> centresInteret, Comportement comportement){
+	public Utilisateur(String nom, String prenom, int age, ArrayList<String> centresInteret, Comportement comportement){
 		this.chaine = new Chaine();
 		this.nom = nom;
 		this.prenom = prenom;
+		this.age = age;
 		this.centresInteret = centresInteret;
 		this.comportement = comportement;
 	}
@@ -80,6 +82,10 @@ public class Utilisateur extends Agent{
 
 	public String getPrenom() {
 		return prenom;
+	}
+	
+	public int getAge() {
+		return age;
 	}
 
 	public ArrayList<String> getCentresInteret() {

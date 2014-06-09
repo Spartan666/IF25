@@ -13,15 +13,12 @@ public class Controleur {
 	
 	
 	public Controleur(){
-		this.fenetre = new Fenetre(youtube, this);
-
-		
+		this.fenetre = new Fenetre(youtube, this);	
 	}
 	
 	
-	public void configurerSimulation(ArrayList<Integer> confPosteur) {
-			youtube = new Youtube(this, fenetre,confPosteur);
-			//fenetre.setSimulation(youtube);
+	public void configurerSimulation(ArrayList<Integer> confUtilisateurs) {
+			youtube = new Youtube(this, fenetre, confUtilisateurs);
 	}
 	
 	public static void main(String[] args) {

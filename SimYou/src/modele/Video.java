@@ -13,13 +13,15 @@ public class Video {
 	private int duree;
 	private ArrayList<String> tags = new ArrayList<String>();
 	private Chaine chaine = new Chaine();
+	private int ageRequis;
 	
-	public Video(String titre, String description, int duree, ArrayList<String> tags, Chaine chaine) {
+	public Video(String titre, String description, int duree, ArrayList<String> tags, Chaine chaine, int ageRequis) {
 		this.titre = titre;
 		this.description = description;
 		this.duree = duree;
 		this.tags = tags;
 		this.chaine = chaine;
+		this.ageRequis = ageRequis;
 	}
 	
 	public int getDuree() {
@@ -72,6 +74,10 @@ public class Video {
 	
 	public Chaine getChaine() {
 		return chaine;
+	}
+	
+	public int getAgeRequis() {
+		return ageRequis;
 	}
 
 }
