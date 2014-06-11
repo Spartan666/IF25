@@ -9,6 +9,8 @@ public class Controleur {
 	
 	private Youtube youtube;
 	private Fenetre fenetre;
+	
+	public static int vitesse = 1;
 
 	
 	

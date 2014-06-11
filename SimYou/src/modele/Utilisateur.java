@@ -5,6 +5,7 @@ import madkit.kernel.Agent;
 import madkit.kernel.AgentLogger;
 import madkit.kernel.Message;
 import comportement.Comportement;
+import controleur.Controleur;
 
 public class Utilisateur extends Agent{
 	
@@ -101,7 +102,7 @@ public class Utilisateur extends Agent{
 	}
 
 	public void mettrePause(int duree) {	//Permet d'utiliser la méthode pause() dans la classe Comportement
-		pause(duree);
+		pause(duree * 1000 / Controleur.vitesse);
 	}
 	
 	public void activate() {
