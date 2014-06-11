@@ -16,19 +16,23 @@ public class Fenetre extends JFrame {
 	
 
 	private JPanel contentPane;
-	private Youtube youtube;
 	private Controleur controleur;
 
 
-	public Fenetre(Youtube youtube, Controleur controleur) {
+	public Fenetre(Controleur controleur) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 450);
+		setBounds(100, 100, 772, 559);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(new f2(youtube,controleur,this));
+		setContentPane(new PanelAccueil(controleur,this));
 		setVisible(true);
 		
+	}
+
+
+	public JPanel getContentPane() {
+		return contentPane;
 	}
 	
 	

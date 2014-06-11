@@ -16,8 +16,10 @@ import javax.swing.Action;
 import modele.Youtube;
 
 import controleur.Controleur;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
 
-public class f2 extends JPanel implements ActionListener {
+public class PanelAccueil extends JPanel implements ActionListener {
 	private JTextField textField;
 	private Youtube youtube;
 	private Controleur controleur;
@@ -36,7 +38,7 @@ public class f2 extends JPanel implements ActionListener {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	
+	private JSpinner spinner;
 	private FenetreConfPoste FconfPosteur;
 	private FenetreConfFan FconfFan;
 	private FenetreConfObjecteur FconfObjecteur;
@@ -49,7 +51,7 @@ public class f2 extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public f2(Youtube youtube, Controleur controleur,Fenetre fenetre) {
+	public PanelAccueil(Controleur controleur,Fenetre fenetre) {
 		
 		FconfPosteur=new FenetreConfPoste();
 		FconfFan=new FenetreConfFan();
@@ -186,6 +188,11 @@ public class f2 extends JPanel implements ActionListener {
 		textField_5.setColumns(10);
 		textField_5.setBounds(456, 54, 86, 20);
 		add(textField_5);
+		
+		spinner = new JSpinner();
+		spinner.setModel(new SpinnerListModel(new String[] {"Rapide (ms)", "Temps r\u00E9el (s)"}));
+		spinner.setBounds(117, 245, 104, 20);
+		add(spinner);
 
 
 	}
@@ -194,7 +201,7 @@ public class f2 extends JPanel implements ActionListener {
 			if(e.getSource()==btnDmarrerSimulation){
 				new Thread(new Runnable() {
 				      public void run() {
-							controleur.configurerSimulation(genererDonnees());
+							controleur.configurerSimulation(genererDonnees(),spinner.getValue().toString());
 				      }
 				  }).start();
 			}
