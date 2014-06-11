@@ -1,7 +1,11 @@
 package modele;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+import java.util.HashMap;
+=======
 import java.util.Random;
+>>>>>>> ecfb666cb9600d6863bafdbd56643bfc2f36eb9f
 
 import vue.Fenetre;
 import comportement.Comportement;
@@ -117,6 +121,69 @@ public class Youtube {
 		this.utilisateurs.add(utilisateur);
 	}
 	
+	public HashMap infosPlateformes(){
+		HashMap<String, Integer> infos= new HashMap<String, Integer>();
+		infos.put("nbUtilisateur", this.getUtilisateurs().size());
+		int nbVideos=0;
+		int nbVideosAdulte=0;
+		int nbCommentaires=0;
+		int nbLikes=0;
+		int nbDislikes=0;
+		int moyenneLikeVideo=0;
+		int MaxLike=0;
+		int MinLike=0;
+		int moyenneCommentaireVideo=0;
+		int nbVueTotal=0;
+		int nbAbonnement=0;
+		int nbAbonne=0;
+		int moyenneLikeUtilisateur=0;
+		int moyenneDisLikeUtilisateur=0;
+		int moyenneAbonnement;
+		int moyenneAbonne;
+		int moyenneVueVideo;
+		int nbVideoNonVote;
+		int RatioVideoNonVote;
+		int moyenneDisLikeVideo;
+		int moyenneCommentaireUtilisateur;
+
+		for(Utilisateur u:this.getUtilisateurs()){
+			nbVideos=+u.getChaine().getVideos().size();
+			nbAbonnement=+u.getAbonnementsChaines().size();
+			if(u.getAbonnementsChaines().size()>0)
+				nbAbonne=+1;
+			for(Video v:u.getChaine().getVideos()){
+				if(v.getAgeRequis()>=18)
+					nbVideosAdulte=+1;
+				nbCommentaires=+v.getNbCommentaires();
+				nbLikes=+v.getNbLikes();
+				nbDislikes=+v.getNbDislikes();
+				if(v.getNbLikes()>MaxLike)
+					MaxLike=v.getNbLikes();
+				MinLike=MaxLike;
+				if(v.getNbLikes()<MinLike)
+					MinLike=v.getNbLikes();
+				nbVueTotal=+v.getNbVues();
+				if(v.getNbLikes()==0 && v.getNbDislikes() ==0)
+					nbVideoNonVote=+1;
+			}
+		}
+		moyenneLikeVideo=nbLikes/nbVideos;
+		moyenneDisLikeVideo=nbDislikes/nbVideos;
+		RatioVideoNonVote=nbVideoNonVote/nbVideos;
+		moyenneCommentaireVideo=nbCommentaires/nbVideos;
+		moyenneVueVideo=nbVueTotal/nbVideos;
+		moyenneLikeUtilisateur=nbLikes/this.getUtilisateurs().size();
+		moyenneDisLikeUtilisateur=nbDislikes/this.getUtilisateurs().size();
+		moyenneAbonnement=nbAbonnement/this.getUtilisateurs().size();
+		moyenneAbonne=nbAbonne/this.getUtilisateurs().size();
+		moyenneCommentaireUtilisateur=nbCommentaires/this.getUtilisateurs().size();
+	}
+		infos.put("nbVideo",nbVideos);
+		
+		
+		return null;
+		
+	}
 /*	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Youtube youtube = new Youtube();
