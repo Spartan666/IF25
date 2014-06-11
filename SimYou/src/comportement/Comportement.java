@@ -16,13 +16,15 @@ public class Comportement extends Thread {
 	private int bonusProbaCommenter;
 	private int probaAbonner;
 	
+	public static int coefficientBonusProbaVote;
+	
 	public Comportement(int probaVote, int probaLike, int probaCommenter, int bonusProbaCommenter, int probaAbonner) {
 		if (probaVote >= 0) {
-			if (probaVote <= 100) {
+			if (probaVote <= 70) {
 				this.probaVote = probaVote;
 			}
 			else {
-				this.probaVote = 100;
+				this.probaVote = 70;
 			}
 		}
 		else {
@@ -102,17 +104,33 @@ public class Comportement extends Thread {
 		if (visionneur.getAge() >= video.getAgeRequis()) {
 			visionneur.getAgentLogger().info("Visionne une video : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
 			visionneur.mettrePause(video.getDuree());
-			int proba = new Random().nextInt(100);
+			//Test des centres d'intérêt
+			ArrayList<String> centresInteret = visionneur.getCentresInteret();
+			ArrayList<String> tags = video.getTags();
+			int nbTagsCentresInteret = 0;
+			for (int i = 0; i < centresInteret.size(); i++) {
+				if (tags.contains(centresInteret.get(i))) {
+					nbTagsCentresInteret ++;
+				}
+			}
+			int bonusProbaVote = nbTagsCentresInteret * Comportement.coefficientBonusProbaVote;
+			
+			int proba = new Random().nextInt(70);
+			int probaBonus = 0;
+			if (bonusProbaVote > 0) {
+				probaBonus = new Random().nextInt(bonusProbaVote);
+			}
+			proba += probaBonus;
 			
 			//Test probabilité de voter
-			if (proba <= probaVote) {
+			if (proba <= probaVote + bonusProbaVote) {
 				proba = new Random().nextInt(100);
 				//Test probabilité de liker
 				if (proba <= probaLike) {
 					liker(visionneur, video);
 					//Test probabilité de commenter
 					proba = new Random().nextInt(100);
-					int probaBonus = new Random().nextInt(25);
+					probaBonus = new Random().nextInt(25);
 					proba += probaBonus;
 					if (proba <= probaCommenter + bonusProbaCommenter) {
 						commenter(visionneur, video);
@@ -127,7 +145,7 @@ public class Comportement extends Thread {
 				else {
 					//Test probabilité de commenter
 					proba = new Random().nextInt(100);
-					int probaBonus = new Random().nextInt(25);
+					probaBonus = new Random().nextInt(25);
 					proba += probaBonus;
 					if (proba <= probaCommenter + bonusProbaCommenter) {
 						commenter(visionneur, video);

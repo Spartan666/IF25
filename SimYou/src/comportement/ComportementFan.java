@@ -10,9 +10,9 @@ import modele.Youtube;
 
 public class ComportementFan extends Comportement {
 	
-	public ComportementFan(int probaLike, int probaDislike, int probaCommenter, int bonusProbaCommenter,
+	public ComportementFan(int probaVote, int probaLike, int probaCommenter, int bonusProbaCommenter,
 			int probaAbonner) {
-		super(probaLike, probaDislike, probaCommenter, bonusProbaCommenter, probaAbonner);
+		super(probaVote, probaLike, probaCommenter, bonusProbaCommenter, probaAbonner);
 		// TODO Auto-generated constructor stub
 	}
 

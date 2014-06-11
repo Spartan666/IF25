@@ -67,7 +67,7 @@ public class FenetreConfPoste extends JDialog implements ActionListener {
 		}
 		{
 			FrequencePostage = new JTextField();
-			FrequencePostage.setText("50");
+			FrequencePostage.setText("5");
 			FrequencePostage.setBounds(37, 172, 86, 20);
 			contentPanel.add(FrequencePostage);
 			FrequencePostage.setColumns(10);
@@ -93,7 +93,7 @@ public class FenetreConfPoste extends JDialog implements ActionListener {
 			contentPanel.add(lblProbaAbonner);
 		}
 		{
-			JLabel lblFrequencePostage = new JLabel("Frequence postage");
+			JLabel lblFrequencePostage = new JLabel("Periodicite postage");
 			lblFrequencePostage.setBounds(133, 175, 156, 14);
 			contentPanel.add(lblFrequencePostage);
 		}

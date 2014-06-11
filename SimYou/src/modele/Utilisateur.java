@@ -105,7 +105,7 @@ public class Utilisateur extends Agent{
 	}
 	
 	public void activate() {
-		this.logger.info("Je me connecte");
+		this.logger.info("Je me connecte (Age : " + this.getAge() + " ans) " + this.getCentresInteret());
 		pause(2000);
 	}
 	

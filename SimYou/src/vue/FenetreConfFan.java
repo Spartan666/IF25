@@ -23,7 +23,6 @@ public class FenetreConfFan extends JDialog implements ActionListener {
 	private JButton okButton;
 	private JTextField ProbaAbonner;
 	private JLabel lblProbaAbonner_1;
-	private JList list;
 
 
 
@@ -96,11 +95,7 @@ public class FenetreConfFan extends JDialog implements ActionListener {
 			lblProbaAbonner_1.setBounds(133, 113, 156, 14);
 			contentPanel.add(lblProbaAbonner_1);
 		}
-		{
-			list = new JList();
-			list.setBounds(320, 196, -71, -39);
-			contentPanel.add(list);
-		}
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

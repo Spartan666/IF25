@@ -11,9 +11,9 @@ import modele.Youtube;
 
 public class ComportementRapide extends Comportement {
 
-	public ComportementRapide(int probaLike, int probaDislike,
+	public ComportementRapide(int probaVote, int probaLike,
 			int probaCommenter, int bonusProbaCommenter, int probaAbonner) {
-		super(probaLike, probaDislike, probaCommenter, bonusProbaCommenter, probaAbonner);
+		super(probaVote, probaLike, probaCommenter, bonusProbaCommenter, probaAbonner);
 		// TODO Auto-generated constructor stub
 	}
 
