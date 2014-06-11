@@ -24,7 +24,7 @@ public class Youtube {
 	 */
 	private ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 	
-	public Youtube(Controleur controleur, Fenetre fenetre,ArrayList<Integer> confUtilisateurs){
+	public Youtube(Controleur controleur,ArrayList<Integer> confUtilisateurs){
 		Utilisateur.youtube=this;
 		 Madkit m = new Madkit();
 		 
@@ -63,7 +63,13 @@ public class Youtube {
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
 		}
-		
+		//ConfLambda
+		for(int i=0;i<confUtilisateurs.get(31);i++){
+			Utilisateur U = new Utilisateur("Lambda"+i, "Joe", 40, null, new Comportement(confUtilisateurs.get(32),confUtilisateurs.get(33),confUtilisateurs.get(34),confUtilisateurs.get(35),confUtilisateurs.get(36)));
+			U.setName("Lambda"+i);
+			this.addUtilisateur(U);
+             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+		}
 	}
 	
 	public ArrayList<Utilisateur> getUtilisateurs() {

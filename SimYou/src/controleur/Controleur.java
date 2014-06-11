@@ -18,8 +18,10 @@ public class Controleur {
 	
 	
 	public void configurerSimulation(ArrayList<Integer> confUtilisateurs) {
-			youtube = new Youtube(this, fenetre, confUtilisateurs);
+			youtube = new Youtube(this,confUtilisateurs);
 	}
+	
+	//public void AfficherInformations(int nbvideo, int nbcommentaire, int nblike, int nbdislike, int moyenneLike, int MaxLike, int MinLike,int moyenneCommentaire, int MaxCommentaire, int MinCommentaire, int nbVueTotal,int nbAbonnementMoyen,)
 	
 	public static void main(String[] args) {
 		new Controleur();

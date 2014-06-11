@@ -11,9 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JList;
 
-public class FenetreConfFan extends JDialog implements ActionListener {
+public class FenetreConfLambda extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField ProbaCommenter;
@@ -23,14 +22,13 @@ public class FenetreConfFan extends JDialog implements ActionListener {
 	private JButton okButton;
 	private JTextField ProbaAbonner;
 	private JLabel lblProbaAbonner_1;
-	private JList list;
 
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public FenetreConfFan() {
+	public FenetreConfLambda() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,11 +93,6 @@ public class FenetreConfFan extends JDialog implements ActionListener {
 			lblProbaAbonner_1 = new JLabel("Proba Abonner");
 			lblProbaAbonner_1.setBounds(133, 113, 156, 14);
 			contentPanel.add(lblProbaAbonner_1);
-		}
-		{
-			list = new JList();
-			list.setBounds(320, 196, -71, -39);
-			contentPanel.add(list);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -170,4 +163,5 @@ public class FenetreConfFan extends JDialog implements ActionListener {
 			this.setVisible(false);
 		}
 	}
+
 }
