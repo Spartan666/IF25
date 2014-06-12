@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import madkit.kernel.Agent;
 import madkit.kernel.AgentLogger;
 import madkit.kernel.Message;
+import comportement.Comportement;
 import comportement.ComportementLambda;
 import controleur.Controleur;
 
@@ -14,7 +15,7 @@ public class Utilisateur extends Agent{
 	private String prenom;
 	private int age;
 	private ArrayList<String> centresInteret;
-	private ComportementLambda comportement;
+	private Comportement comportement;
 	private ArrayList<Video> videosVues = new ArrayList<Video>();
 	private ArrayList<Video> likedVideos = new ArrayList<Video>();
 	private ArrayList<Video> dislikedVideos = new ArrayList<Video>();
@@ -24,7 +25,7 @@ public class Utilisateur extends Agent{
 	public static Youtube youtube;
 
 	
-	public Utilisateur(String nom, String prenom, int age, ArrayList<String> centresInteret, ComportementLambda comportement){
+	public Utilisateur(String nom, String prenom, int age, ArrayList<String> centresInteret, Comportement comportement){
 		this.chaine = new Chaine();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -93,7 +94,7 @@ public class Utilisateur extends Agent{
 		return centresInteret;
 	}
 
-	public ComportementLambda getComportement() {
+	public Comportement getComportement() {
 		return comportement;
 	}
 	
