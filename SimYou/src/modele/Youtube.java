@@ -30,6 +30,7 @@ public class Youtube {
 	 * @param args
 	 */
 	private ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+	public  int nbVisiteurs = 0;
 	private Controleur controleur;
 	private Madkit m;
 	
@@ -117,6 +118,19 @@ public class Youtube {
 		}
 	}
 	
+	public void lancerVisiteurs(int nbVisiteursMinute) {
+		for (int i = 1; i <= nbVisiteursMinute; i++) {
+			Visiteur V = new Visiteur();
+			nbVisiteurs ++;
+			V.setName("Visiteur" + nbVisiteurs);
+			m.doAction(KernelAction.LAUNCH_AGENT, V, true); //launch a new agent with a GUI
+		}
+	}
+	
+	public int getNbVisiteurs() {
+		return nbVisiteurs;
+	}
+
 	public ArrayList<Utilisateur> getUtilisateurs() {
 		return utilisateurs;
 	}
@@ -125,46 +139,51 @@ public class Youtube {
 		this.utilisateurs.add(utilisateur);
 	}
 	
-	public HashMap infosPlateformes(){
+	public HashMap infosPlateformes(Class<?> comportement){
 		HashMap<String, Double> infos= new HashMap<String, Double>();
 		
 		double nbVideos=0,nbVideosAdulte=0,nbCommentaires=0,nbLikes=0,nbDislikes=0,moyenneLikeVideo=0,
 				MaxLike=0,MinLike=0,moyenneCommentaireVideo=0,nbVueTotal=0,nbAbonnement=0,nbAbonne=0,moyenneLikeUtilisateur=0,
-				moyenneDisLikeUtilisateur=0,moyenneAbonnement,moyenneAbonne,moyenneVueVideo,nbVideoNonVote=0,RatioVideoNonVote,moyenneDisLikeVideo,moyenneCommentaireUtilisateur;
-
+				moyenneDisLikeUtilisateur=0,moyenneAbonnement,moyenneAbonne,moyenneVueVideo,nbVideoNonVote=0,RatioVideoNonVote,moyenneDisLikeVideo,moyenneCommentaireUtilisateur,
+				moyenneVueUtilisateur,nbUtilisateurs=0;
 		for(Utilisateur u:this.getUtilisateurs()){
-			nbVideos+=u.getChaine().getVideos().size();
-			nbAbonnement+=u.getAbonnementsChaines().size();
-			if(u.getAbonnementsChaines().size()>0)
-				nbAbonne+=1;
-			for(Video v:u.getChaine().getVideos()){
-				if(v.getAgeRequis()>=18)
-					nbVideosAdulte+=1;
-				nbCommentaires+=v.getNbCommentaires();
-				nbLikes+=v.getNbLikes();
-				nbDislikes+=v.getNbDislikes();
-				if(v.getNbLikes()>MaxLike)
-					MaxLike=v.getNbLikes();
-				MinLike=MaxLike;
-				if(v.getNbLikes()<MinLike)
-					MinLike=v.getNbLikes();
-				nbVueTotal+=v.getNbVues();
-				if(v.getNbLikes()==0 && v.getNbDislikes() ==0)
-					nbVideoNonVote+=1;
+		if(comportement.isAssignableFrom(u.getComportement().getClass()))
+				{
+					nbUtilisateurs+=1;
+					nbVideos+=u.getChaine().getVideos().size();
+					nbAbonnement+=u.getAbonnementsChaines().size();
+					if(u.getAbonnementsChaines().size()>0)
+						nbAbonne+=1;
+					for(Video v:u.getChaine().getVideos()){
+						if(v.getAgeRequis()>=18)
+							nbVideosAdulte+=1;
+						nbCommentaires+=v.getNbCommentaires();
+						nbLikes+=v.getNbLikes();
+						nbDislikes+=v.getNbDislikes();
+						if(v.getNbLikes()>MaxLike)
+							MaxLike=v.getNbLikes();
+						MinLike=MaxLike;
+						if(v.getNbLikes()<MinLike)
+							MinLike=v.getNbLikes();
+						nbVueTotal+=v.getNbVues();
+						if(v.getNbLikes()==0 && v.getNbDislikes() ==0)
+							nbVideoNonVote+=1;
+				}
+				}
 			}
-		}
 		moyenneLikeVideo=nbLikes/nbVideos;
 		moyenneDisLikeVideo=nbDislikes/nbVideos;
 		RatioVideoNonVote=nbVideoNonVote/nbVideos;
 		moyenneCommentaireVideo=nbCommentaires/nbVideos;
 		moyenneVueVideo=nbVueTotal/nbVideos;
-		moyenneLikeUtilisateur=nbLikes/this.getUtilisateurs().size();
-		moyenneDisLikeUtilisateur=nbDislikes/this.getUtilisateurs().size();
-		moyenneAbonnement=nbAbonnement/this.getUtilisateurs().size();
+		moyenneLikeUtilisateur=nbLikes/nbUtilisateurs;
+		moyenneDisLikeUtilisateur=nbDislikes/nbUtilisateurs;
+		moyenneAbonnement=nbAbonnement/nbUtilisateurs;
 		moyenneAbonne=nbAbonne/this.getUtilisateurs().size();
-		moyenneCommentaireUtilisateur=nbCommentaires/this.getUtilisateurs().size();
+		moyenneCommentaireUtilisateur=nbCommentaires/nbUtilisateurs;
+		moyenneVueUtilisateur=nbVueTotal/nbUtilisateurs;
 		
-		infos.put("Nombre Utilisateurs:", (double)this.getUtilisateurs().size());
+		infos.put("Nombre Utilisateurs:", nbUtilisateurs);
 		infos.put("Nombre Vidéos",nbVideos);
 		infos.put("Nombre Abonnements", nbAbonnement);
 		infos.put("Nombre Abonnés",nbAbonne);
@@ -179,13 +198,14 @@ public class Youtube {
 		infos.put("Moyenne Like/Vidéo", moyenneLikeVideo);
 		infos.put("Moyenne DisLike/Vidéo", moyenneDisLikeVideo);
 		infos.put("Ratio vidéos non votées", RatioVideoNonVote);
-		infos.put("Moyenne commentaires/Vidéo", moyenneCommentaireVideo);
+		infos.put("Moyenne Commentaires/Vidéo", moyenneCommentaireVideo);
 		infos.put("Moyenne Vue/Vidéo", moyenneVueVideo);
 		infos.put("Moyenne Like/Utilisateur", moyenneLikeUtilisateur);
 		infos.put("Moyenne DisLike/Utilisateur", moyenneDisLikeUtilisateur);
 		infos.put("Moyenne Abonnement", moyenneAbonnement);
 		infos.put("Moyenne Abonne", moyenneAbonne);
 		infos.put("Moyenne Commentaires/Utilisateur", moyenneCommentaireUtilisateur);
+		infos.put("Moyenne Vue/Utilisateur", moyenneVueUtilisateur);
 		return infos;
 	}
 	

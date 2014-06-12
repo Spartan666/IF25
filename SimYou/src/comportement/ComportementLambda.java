@@ -16,4 +16,6 @@ public class ComportementLambda extends Comportement {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+	
 }

@@ -21,7 +21,6 @@ import javax.swing.SpinnerListModel;
 
 public class PanelConfGenerale extends JPanel implements ActionListener {
 	private JTextField textField;
-	private Youtube youtube;
 	private Controleur controleur;
 	private JLabel lblNewLabel;
 	private JLabel lblNombreUtilisateur;
@@ -47,6 +46,7 @@ public class PanelConfGenerale extends JPanel implements ActionListener {
 	private FenetreConfLambda FconfLambda;
 	private JLabel lblNombreDeLambda;
 	private JTextField textField_5;
+	private JTextField nbvisiteursmin;
 
 	/**
 	 * Create the panel.
@@ -84,7 +84,7 @@ public class PanelConfGenerale extends JPanel implements ActionListener {
 		btnEditerPosteur.addActionListener(this);
 		
 		btnDmarrerSimulation = new JButton("D\u00E9marrer simulation");
-		btnDmarrerSimulation.setBounds(262, 244, 164, 23);
+		btnDmarrerSimulation.setBounds(263, 293, 164, 23);
 		add(btnDmarrerSimulation);
 		btnDmarrerSimulation.addActionListener(this);
 		
@@ -190,8 +190,18 @@ public class PanelConfGenerale extends JPanel implements ActionListener {
 		
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerListModel(new String[] {"Rapide (ms)", "Temps r\u00E9el (s)"}));
-		spinner.setBounds(117, 245, 104, 20);
+		spinner.setBounds(125, 294, 104, 20);
 		add(spinner);
+		
+		nbvisiteursmin = new JTextField();
+		nbvisiteursmin.setText("5");
+		nbvisiteursmin.setBounds(195, 245, 86, 20);
+		add(nbvisiteursmin);
+		nbvisiteursmin.setColumns(10);
+		
+		JLabel lblNombreDeVisiteurmin = new JLabel("Nombre de visiteur/min");
+		lblNombreDeVisiteurmin.setBounds(10, 248, 139, 14);
+		add(lblNombreDeVisiteurmin);
 
 
 	}
@@ -279,6 +289,9 @@ public class PanelConfGenerale extends JPanel implements ActionListener {
 		a.add(Integer.parseInt(FconfLambda.getProbaCommenter().getText()));
 		a.add(Integer.parseInt(FconfLambda.getProbaAbonner().getText()));
 		a.add(Integer.parseInt(FconfLambda.getBonusProbaCommenter().getText()));
+		
+		//Visiteur
+		a.add(Integer.parseInt(this.nbvisiteursmin.getText()));
 		return a;		
 	}
 	}

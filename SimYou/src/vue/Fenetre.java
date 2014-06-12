@@ -19,6 +19,8 @@ public class Fenetre extends JFrame {
 	private Controleur controleur;
 
 
+
+
 	public Fenetre(Controleur controleur) {
 		this.controleur=controleur;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,10 +34,8 @@ public class Fenetre extends JFrame {
 	}
 
 
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-	
+
+
 	
 
 

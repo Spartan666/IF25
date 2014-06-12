@@ -14,9 +14,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.lang.reflect.Array;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+
 
 public class PanelSimulationCours extends JPanel implements ActionListener {
 	JLabel lblNewLabel ;
@@ -26,23 +29,11 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public PanelSimulationCours(Controleur controleur,HashMap donnees) {
+	public PanelSimulationCours(Controleur controleur,Object[][] data) {
 		setLayout(null);
 			this.controleur=controleur;
-			//A: Codify map in a two dimensional array:
 			String[] columnNames = {"Key", "Value"};
-			Object[][] data = new Object[donnees.size()][2];
-			java.util.Iterator iterator = donnees.keySet().iterator();
-			int row = 0;
-			while ( iterator.hasNext() ) {
-			Object key = iterator.next();
-			data[row][0] = key;
-			data[row][1] = donnees.get(key);
-			row = row + 1;
-			}
-			table=new JTable(data,columnNames);
-		table.setBounds(10, 36, 561, 425);
-		add(table);
+
 		
 		JLabel lblSimyou = new JLabel("SIMYOU");
 		lblSimyou.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -50,9 +41,45 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 		add(lblSimyou);
 		
 		btnSauvegarder = new JButton("Sauvegarder");
-		btnSauvegarder.setBounds(583, 46, 115, 25);
+		btnSauvegarder.setBounds(644, 52, 115, 25);
 		add(btnSauvegarder);
 		btnSauvegarder.addActionListener(this);
+		
+		table=new JTable(data,columnNames);
+		
+	
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(33, 52, 605, 412);
+		add(scrollPane);
+		
+
+
+		this.actualiserTableaux();
+					
+	}
+	
+	public void actualiserTableaux(){
+		new Thread(new Runnable(){ 
+		      public void run() {
+		    	while(true) {
+		    		try {
+						Thread.sleep(6000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    		Object[][] data1=controleur.getTableauDonnees();
+
+					for(int i=0;i<data1.length;i++){
+						table.setValueAt(data1[i][0], i, 0);
+						table.setValueAt(data1[i][1], i, 1);
+
+					}
+		    	}
+		      }}).start();
+	}
+	public JTable getTable() {
+		return table;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

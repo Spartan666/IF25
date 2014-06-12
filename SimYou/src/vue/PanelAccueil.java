@@ -47,7 +47,10 @@ public class PanelAccueil extends JPanel implements ActionListener {
 		if (e.getSource() == start) {
 			this.controleur.getFenetre().setContentPane(new PanelConfGenerale(this.controleur));
 			this.controleur.getFenetre().validate();
+			this.controleur.getFenetre().setSize(600, 400);
+
 			this.controleur.getFenetre().repaint();
+
 		}
 	}
 	}
