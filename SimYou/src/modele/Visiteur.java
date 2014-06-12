@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import madkit.kernel.Agent;
-import madkit.kernel.AgentLogger;
-import comportement.Comportement;
 import controleur.Controleur;
 
 public class Visiteur extends Agent {

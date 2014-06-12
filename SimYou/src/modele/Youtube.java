@@ -10,7 +10,7 @@ import java.util.Random;
 
 
 import vue.Fenetre;
-import comportement.Comportement;
+import comportement.ComportementLambda;
 import comportement.ComportementFan;
 import comportement.ComportementObjecteur;
 import comportement.ComportementPosteur;
@@ -58,7 +58,7 @@ public class Youtube {
 			    centresInteret.add(ListeCentresInteret.getRandomValue());
 			}
 			int age = 13 + new Random().nextInt(87); //Age entre 13 et 99 ans
-			Utilisateur U = new Utilisateur("Lambda"+i, "Joe", age, centresInteret, new Comportement(confUtilisateurs.get(32),confUtilisateurs.get(33),confUtilisateurs.get(34),confUtilisateurs.get(35),confUtilisateurs.get(36)));
+			Utilisateur U = new Utilisateur("Lambda"+i, "Joe", age, centresInteret, new ComportementLambda(confUtilisateurs.get(32),confUtilisateurs.get(33),confUtilisateurs.get(34),confUtilisateurs.get(35),confUtilisateurs.get(36)));
 			U.setName("Lambda"+i);
 			this.addUtilisateur(U);
              m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI

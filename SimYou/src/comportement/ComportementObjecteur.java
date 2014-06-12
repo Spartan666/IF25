@@ -9,7 +9,7 @@ import modele.Utilisateur;
 import modele.Video;
 import modele.Youtube;
 
-public class ComportementObjecteur extends Comportement {
+public class ComportementObjecteur extends ComportementLambda {
 
 	public ComportementObjecteur(int probaVote, int probaLike,
 			int probaCommenter, int bonusProbaCommenter, int probaAbonner) {

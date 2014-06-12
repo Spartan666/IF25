@@ -8,15 +8,16 @@ import modele.Utilisateur;
 import modele.Video;
 import modele.Youtube;
 
-public class Comportement extends Thread {
+public abstract class Comportement {
 	
 	private int probaVote;
 	private int probaLike;
 	private int probaCommenter;
 	private int bonusProbaCommenter;
 	private int probaAbonner;
-	
+		
 	public static int coefficientBonusProbaVote;
+	
 	
 	public Comportement(int probaVote, int probaLike, int probaCommenter, int bonusProbaCommenter, int probaAbonner) {
 		if (probaVote >= 0) {
@@ -82,6 +83,7 @@ public class Comportement extends Thread {
 
 	}
 	
+	
 	public void selectionnerVideo(Utilisateur visionneur, Youtube youtube) {
 		ArrayList<Utilisateur> utilisateurs = youtube.getUtilisateurs();	//Sélection d'un propriétaire (de chaîne) aléatoire
 		int index = new Random().nextInt(utilisateurs.size());
@@ -113,7 +115,7 @@ public class Comportement extends Thread {
 					nbTagsCentresInteret ++;
 				}
 			}
-			int bonusProbaVote = nbTagsCentresInteret * Comportement.coefficientBonusProbaVote;
+			int bonusProbaVote = nbTagsCentresInteret * ComportementLambda.coefficientBonusProbaVote;
 			
 			int proba = new Random().nextInt(70);
 			int probaBonus = 0;
