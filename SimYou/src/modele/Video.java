@@ -12,7 +12,7 @@ public class Video {
 	private int nbCommentaires = 0;
 	private int duree;
 	private ArrayList<String> tags = new ArrayList<String>();
-	private Chaine chaine = new Chaine();
+	private Chaine chaine;
 	private int ageRequis;
 	
 	public Video(String titre, String description, int duree, ArrayList<String> tags, Chaine chaine, int ageRequis) {

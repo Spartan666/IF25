@@ -73,12 +73,12 @@ public class FenetreConfPoste extends JDialog implements ActionListener {
 			FrequencePostage.setColumns(10);
 		}
 		{
-			JLabel lblProbalike = new JLabel("Proba Like");
+			JLabel lblProbalike = new JLabel("Proba Vote");
 			lblProbalike.setBounds(133, 13, 156, 14);
 			contentPanel.add(lblProbalike);
 		}
 		{
-			JLabel lblProbaDislike = new JLabel("Proba Dislike");
+			JLabel lblProbaDislike = new JLabel("Proba Like");
 			lblProbaDislike.setBounds(133, 50, 156, 14);
 			contentPanel.add(lblProbaDislike);
 		}

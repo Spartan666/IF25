@@ -6,8 +6,10 @@ public class Chaine {
 	
 	private ArrayList<Video> videos = new ArrayList<Video>();
 	private ArrayList<Utilisateur> abonnes = new ArrayList<Utilisateur>();
+	private Utilisateur proprietaire;
 	
-	public Chaine(){
+	public Chaine(Utilisateur proprietaire){
+		this.proprietaire = proprietaire;
 	}
 	
 	public ArrayList<Video> getVideos(){

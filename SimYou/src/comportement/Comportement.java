@@ -174,15 +174,19 @@ public abstract class Comportement {
 	}
 	
 	public void liker(Utilisateur visionneur, Video video) {
-		video.addLike();
-		visionneur.addLikedVideo(video);
-		visionneur.getAgentLogger().info("Video likee");
+		if (!visionneur.getLikedVideos().contains(video)) {	
+			video.addLike();
+			visionneur.addLikedVideo(video);
+			visionneur.getAgentLogger().info("Video likee");
+		}
 	}
 	
 	public void disliker(Utilisateur visionneur, Video video) {
-		video.addDislike();
-		visionneur.addDislikedVideo(video);
-		visionneur.getAgentLogger().info("Video dislikee");
+		if (!visionneur.getDislikedVideos().contains(video)) {	
+			video.addDislike();
+			visionneur.addDislikedVideo(video);
+			visionneur.getAgentLogger().info("Video dislikee");
+		}
 	}
 
 	public void commenter(Utilisateur visionneur, Video video) {
@@ -192,8 +196,11 @@ public abstract class Comportement {
 	}
 	
 	public void abonner(Utilisateur visionneur, Chaine chaine) {
-		chaine.addAbonne(visionneur);
-		visionneur.addAbonnementChaine(chaine);
-		visionneur.getAgentLogger().info("Abonnement a la chaine");
+		//Test si vidéo pas encore vue
+		if (!visionneur.getAbonnementsChaines().contains(chaine)) {	
+			chaine.addAbonne(visionneur);
+			visionneur.addAbonnementChaine(chaine);
+			visionneur.getAgentLogger().info("Abonnement a la chaine");
+		}
 	}
 }

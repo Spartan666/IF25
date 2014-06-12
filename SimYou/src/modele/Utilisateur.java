@@ -26,7 +26,7 @@ public class Utilisateur extends Agent{
 
 	
 	public Utilisateur(String nom, String prenom, int age, ArrayList<String> centresInteret, Comportement comportement){
-		this.chaine = new Chaine();
+		this.chaine = new Chaine(this);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.age = age;
@@ -54,7 +54,7 @@ public class Utilisateur extends Agent{
 		this.likedVideos.add(video);
 	}
 	
-	public ArrayList<Video> getDislikedVIdeos() {
+	public ArrayList<Video> getDislikedVideos() {
 		return dislikedVideos;
 	}
 	
