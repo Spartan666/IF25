@@ -13,7 +13,8 @@ import modele.ListeCentresInteret;
 public class ComportementPosteur extends Comportement {
 
 	private int periodicitePostage; //Valeur entre 1 (postage pour chaque visionnage) et 10 (postage pour 10 visionnages)
-	
+	static int nbinstance=0;
+
 	public ComportementPosteur(int probaVote, int probaLike,
 			int probaCommenter, int probaAbonner, int bonusProbaCommenter, int periodicitePostage) {
 		super(probaVote, probaLike, probaCommenter, bonusProbaCommenter, probaAbonner);
@@ -28,7 +29,13 @@ public class ComportementPosteur extends Comportement {
 		else {
 			this.periodicitePostage = 10;
 		}
+		nbinstance+=1;
+
 		// TODO Auto-generated constructor stub
+	}
+
+	public static int getNbinstance() {
+		return nbinstance;
 	}
 
 	public void selectionnerVideo(Utilisateur utilisateur, Youtube youtube) {

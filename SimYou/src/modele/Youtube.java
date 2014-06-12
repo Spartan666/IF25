@@ -49,7 +49,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Posteur"+i, "Joe", age, centresInteret, new ComportementPosteur(confUtilisateurs.get(1),confUtilisateurs.get(2),confUtilisateurs.get(3),confUtilisateurs.get(4),confUtilisateurs.get(5), confUtilisateurs.get(6)));
 			U.setName("Posteur"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementPosteur.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}
 		//ConfLambda
 		for(int i=0;i<confUtilisateurs.get(31);i++){
@@ -62,7 +65,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Lambda"+i, "Joe", age, centresInteret, new ComportementLambda(confUtilisateurs.get(32),confUtilisateurs.get(33),confUtilisateurs.get(34),confUtilisateurs.get(35),confUtilisateurs.get(36)));
 			U.setName("Lambda"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementLambda.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}		
 		//ConfFan
 		for(int i=0;i<confUtilisateurs.get(7);i++){
@@ -75,7 +81,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Fan"+i, "Joe", age, centresInteret, new ComportementFan(confUtilisateurs.get(8),confUtilisateurs.get(9),confUtilisateurs.get(10),confUtilisateurs.get(11),confUtilisateurs.get(12)));
 			U.setName("Fan"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementFan.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}
 		//ConfObjecteur
 		for(int i=0;i<confUtilisateurs.get(13);i++){
@@ -88,7 +97,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Objecteur"+i, "Joe", age, centresInteret, new ComportementObjecteur(confUtilisateurs.get(14),confUtilisateurs.get(15),confUtilisateurs.get(16),confUtilisateurs.get(17),confUtilisateurs.get(18)));
 			U.setName("Objecteur"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementObjecteur.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}
 		//ConfRapide
 		for(int i=0;i<confUtilisateurs.get(19);i++){
@@ -101,7 +113,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Rapide"+i, "Joe", age, centresInteret, new ComportementRapide(confUtilisateurs.get(20),confUtilisateurs.get(21),confUtilisateurs.get(22),confUtilisateurs.get(23),confUtilisateurs.get(24)));
 			U.setName("Rapide"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementRapide.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}
 		//ConfSuiveur
 		for(int i=0;i<confUtilisateurs.get(25);i++){
@@ -114,7 +129,10 @@ public class Youtube {
 			Utilisateur U = new Utilisateur("Suiveur"+i, "Joe", age, centresInteret, new ComportementSuiveur(confUtilisateurs.get(26),confUtilisateurs.get(27),confUtilisateurs.get(28),confUtilisateurs.get(29),confUtilisateurs.get(30)));
 			U.setName("Suiveur"+i);
 			this.addUtilisateur(U);
-             m.doAction(KernelAction.LAUNCH_AGENT,U, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(ComportementSuiveur.getNbinstance()>1)
+				b=false;
+             m.doAction(KernelAction.LAUNCH_AGENT,U, b); //launch a new agent with a GUI
 		}
 	}
 	
@@ -123,7 +141,10 @@ public class Youtube {
 			Visiteur V = new Visiteur();
 			nbVisiteurs ++;
 			V.setName("Visiteur" + nbVisiteurs);
-			m.doAction(KernelAction.LAUNCH_AGENT, V, true); //launch a new agent with a GUI
+			boolean b=true;
+			if(Visiteur.getNbinstance()>1)
+				b=false;
+			m.doAction(KernelAction.LAUNCH_AGENT, V, b); //launch a new agent with a GUI
 		}
 	}
 	
@@ -157,9 +178,6 @@ public class Youtube {
 					for(Video v:u.getChaine().getVideos()){
 						if(v.getAgeRequis()>=18)
 							nbVideosAdulte+=1;
-						nbCommentaires+=v.getNbCommentaires();
-						nbLikes+=v.getNbLikes();
-						nbDislikes+=v.getNbDislikes();
 						if(v.getNbLikes()>MaxLike)
 							MaxLike=v.getNbLikes();
 						MinLike=MaxLike;
@@ -170,6 +188,9 @@ public class Youtube {
 							nbVideoNonVote+=1;
 				}
 				}
+				nbLikes+=u.getLikedVideos().size();
+				nbDislikes+=u.getDislikedVideos().size();
+				nbCommentaires+=u.getVideosCommentees().size();
 			}
 		moyenneLikeVideo=nbLikes/nbVideos;
 		moyenneDisLikeVideo=nbDislikes/nbVideos;

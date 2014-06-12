@@ -1,13 +1,36 @@
 package controleur;
 
+import it.uniroma1.dis.wiserver.gexf4j.core.Edge;
+import it.uniroma1.dis.wiserver.gexf4j.core.EdgeType;
+import it.uniroma1.dis.wiserver.gexf4j.core.Gexf;
+import it.uniroma1.dis.wiserver.gexf4j.core.Graph;
+import it.uniroma1.dis.wiserver.gexf4j.core.Mode;
+import it.uniroma1.dis.wiserver.gexf4j.core.Node;
+import it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute;
+import it.uniroma1.dis.wiserver.gexf4j.core.data.AttributeClass;
+import it.uniroma1.dis.wiserver.gexf4j.core.data.AttributeList;
+import it.uniroma1.dis.wiserver.gexf4j.core.data.AttributeType;
+import it.uniroma1.dis.wiserver.gexf4j.core.impl.GexfImpl;
+import it.uniroma1.dis.wiserver.gexf4j.core.impl.StaxGraphWriter;
+import it.uniroma1.dis.wiserver.gexf4j.core.impl.data.AttributeListImpl;
+import it.uniroma1.dis.wiserver.gexf4j.core.impl.viz.ColorImpl;
+import it.uniroma1.dis.wiserver.gexf4j.core.viz.NodeShape;
+
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
+
+
 
 import comportement.Comportement;
 import comportement.ComportementFan;
@@ -19,8 +42,11 @@ import comportement.ComportementSuiveur;
 
 import vue.Fenetre;
 import vue.PanelSimulationCours;
+import madkit.action.AgentAction;
 import madkit.action.KernelAction;
 import madkit.kernel.Madkit;
+import modele.Chaine;
+import modele.Utilisateur;
 import modele.Visiteur;
 import modele.Youtube;
 
@@ -105,8 +131,81 @@ public class Controleur {
 		     fw.close();
 		 }
 		 catch(Exception e){};
-		 int code = 0;
-		 System.exit(code);
+	}
+	
+	public void SauvegarderGrapheChaines(File f){
+		Gexf gexf = new GexfImpl();
+		Calendar date = Calendar.getInstance();
+		Hashtable<Utilisateur, Node> hash= new Hashtable<Utilisateur, Node>();
+		
+		gexf.getMetadata()
+			.setLastModified(date.getTime())
+			.setCreator("IF25")
+			.setDescription("Graphe des chaines influentes");
+		gexf.setVisualization(true);
+
+		Graph graph = gexf.getGraph();
+		graph.setDefaultEdgeType(EdgeType.DIRECTED).setMode(Mode.STATIC);
+		
+		AttributeList attrList = new AttributeListImpl(AttributeClass.NODE);
+		graph.getAttributeLists().add(attrList);
+		
+		Attribute attNom = (Attribute) attrList.createAttribute("0",AttributeType.STRING, "Nom");
+		Attribute attNbAbonne = (Attribute) attrList.createAttribute("1", AttributeType.INTEGER, "Nombre abonnes");
+		int max=1;
+		for(Utilisateur U:this.youtube.getUtilisateurs()){
+			if(U.getChaine().getAbonnes().size()>max)
+				max=U.getChaine().getAbonnes().size();
+		}
+		Node gephi = null;
+		for(Utilisateur U:this.youtube.getUtilisateurs()){
+			gephi = graph.createNode(U.getNom());
+			gephi
+			.setLabel(U.getNom())
+			.setSize((U.getChaine().getAbonnes().size()*100)/max)
+			.getAttributeValues()
+				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNom, U.getNom())
+				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNbAbonne, ""+U.getChaine().getAbonnes().size());
+			if(U.getComportement() instanceof ComportementFan)
+				gephi.setColor(new ColorImpl(249, 0, 0));
+			if((U.getComportement() instanceof ComportementLambda))
+				gephi.setColor(new ColorImpl(158, 1, 249));
+			if(U.getComportement() instanceof ComportementObjecteur)
+				gephi.setColor(new ColorImpl(230, 100, 98));
+			if(U.getComportement() instanceof ComportementPosteur)
+				gephi.setColor(new ColorImpl(1, 249, 1));
+			if(U.getComportement() instanceof ComportementRapide)
+				gephi.setColor(new ColorImpl(249, 232, 1));
+			if(U.getComportement() instanceof ComportementSuiveur)
+				gephi.setColor(new ColorImpl(0, 0, 0));
+			hash.put(U, gephi);
+		}
+		
+		
+		for(Utilisateur U: hash.keySet()){
+			for(Chaine c:U.getAbonnementsChaines()){
+				System.out.println(hash.get(U));
+				Edge E=hash.get(U).connectTo(hash.get(c.getProprietaire()));
+				E.setEdgeType(EdgeType.DIRECTED);
+			}
+		}
+		
+		
+		//
+	
+
+		StaxGraphWriter graphWriter = new StaxGraphWriter();
+		 Writer out;
+			try {
+				out =  new FileWriter(f, false);
+				graphWriter.writeToStream(gexf, out, "UTF-8");
+				System.out.println(f.getAbsolutePath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		 
+
+		    	     
 	}
 	
 	public Object[][] formaterDonneesTableaux(HashMap donneesGenerale, HashMap donneesComportementLambda, HashMap donneesComportementObjecteur,

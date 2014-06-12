@@ -9,6 +9,17 @@ import controleur.Controleur;
 public class Visiteur extends Agent {
 
 	public static Youtube youtube;
+	static int nbinstance =0;
+	
+	public static int getNbinstance() {
+		return nbinstance;
+	}
+
+
+	public Visiteur(){
+		nbinstance+=1;
+	}
+
 	
 	public void activate() {
 		this.logger.info("Visiteur en ligne");

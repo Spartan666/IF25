@@ -26,6 +26,12 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 	Controleur controleur;
 	private JTable table;
 	private JButton btnSauvegarder;
+	JButton btnSauvegarder_1;
+	private File file;
+	private File file2;
+
+	private JButton btnFichiers;
+
 	/**
 	 * Create the panel.
 	 */
@@ -40,10 +46,24 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 		lblSimyou.setBounds(33, 11, 235, 14);
 		add(lblSimyou);
 		
-		btnSauvegarder = new JButton("Sauvegarder");
-		btnSauvegarder.setBounds(644, 52, 115, 25);
+		btnSauvegarder = new JButton("Statistiques");
+		btnSauvegarder.setBounds(644, 48, 115, 23);
 		add(btnSauvegarder);
 		btnSauvegarder.addActionListener(this);
+		
+		btnSauvegarder_1 = new JButton("R\u00E9seau chaines");
+		btnSauvegarder_1.setBounds(644, 82, 115, 23);
+		add(btnSauvegarder_1);
+		btnSauvegarder_1.addActionListener(this);
+		
+		JLabel lblSauvegarder = new JLabel("Sauvegarder");
+		lblSauvegarder.setBounds(664, 23, 75, 14);
+		add(lblSauvegarder);
+		
+		btnFichiers = new JButton("Fichiers");
+		btnFichiers.addActionListener(this);
+		btnFichiers.setBounds(644, 116, 115, 23);
+		add(btnFichiers);
 		
 		table=new JTable(data,columnNames);
 		
@@ -63,7 +83,7 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 		      public void run() {
 		    	while(true) {
 		    		try {
-						Thread.sleep(6000);
+						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -91,13 +111,57 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 			 
 			if (userSelection == JFileChooser.APPROVE_OPTION) {
 			     File file = fileChooser.getSelectedFile();
+			     if(!file.getAbsolutePath().toLowerCase().endsWith(".txt"))
+			     {
+			         file= new File(file.getAbsolutePath() + ".txt");
+			     }
 			    System.out.println("Save as file: " + file.getAbsolutePath());
 				    	  controleur.SauvegarderModele(file);
 				
 			   
 			}
 		}
-		
+		else if(e.getSource()==btnSauvegarder_1){
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Specify a file to save");   
+			 
+			int userSelection = fileChooser.showSaveDialog(this);
+			 
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+			     file = fileChooser.getSelectedFile();
+			    System.out.println("Save as file: " + file.getAbsolutePath());
+			    if(!file.getAbsolutePath().toLowerCase().endsWith(".gexf"))
+			     {
+			         file= new File(file.getAbsolutePath() + ".gexf");
+			     }
+			new Thread(new Runnable() {
+			      public void run() {
+				    	controleur.SauvegarderGrapheChaines(file);
+			      }
+			}).start();
+			}
+		}
+		else if(e.getSource()==btnFichiers){
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Specify a file to save");   
+			 
+			int userSelection = fileChooser.showSaveDialog(this);
+			 
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+			     file = fileChooser.getSelectedFile();
+			    System.out.println("Save as file: " + file.getAbsolutePath());
+			    	String chemin=file.getAbsolutePath();
+			         file= new File(chemin + ".gexf");
+			         file2= new File(chemin + ".txt");
+			new Thread(new Runnable() {
+			      public void run() {
+				    	controleur.SauvegarderGrapheChaines(file);
+				    	controleur.SauvegarderModele(file2);
+			      }
+			}).start();
+			
+		}
+		}
 	}
 	}
 

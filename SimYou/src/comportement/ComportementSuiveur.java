@@ -11,10 +11,18 @@ import modele.Youtube;
 
 public class ComportementSuiveur extends Comportement {
 
+	static int nbinstance=0;
+
 	public ComportementSuiveur(int probaVote, int probaLike,
 			int probaCommenter, int bonusProbaCommenter, int probaAbonner) {
 		super(probaVote, probaLike, probaCommenter, bonusProbaCommenter, probaAbonner);
 		// TODO Auto-generated constructor stub
+		nbinstance+=1;
+
+	}
+
+	public static int getNbinstance() {
+		return nbinstance;
 	}
 
 	public void selectionnerVideo(Utilisateur visionneur, Youtube youtube) {
