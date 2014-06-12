@@ -50,7 +50,7 @@ public class ComportementPosteur extends Comportement {
 		Video video = new Video("video" + chaine.getVideos().size() + utilisateur.getPrenom() + utilisateur.getNom(), "Blabla", duree, tags, chaine, ageRequis); //Création de la video
 		chaine.addVideo(video);
 		utilisateur.getAgentLogger().info("Video postee : " + video.getTitre() + " " + video.getDuree() + "s Age requis : " + video.getAgeRequis() + " ans " + video.getTags());
-		utilisateur.mettrePause(1000);	
+		utilisateur.mettrePause(5);	
 	}
 	
 	

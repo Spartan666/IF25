@@ -13,6 +13,7 @@ import vue.Fenetre;
 import vue.PanelSimulationCours;
 import madkit.action.KernelAction;
 import madkit.kernel.Madkit;
+import modele.Visiteur;
 import modele.Youtube;
 
 public class Controleur {
@@ -21,7 +22,8 @@ public class Controleur {
 	private Fenetre fenetre;
 	private Madkit m;
 
-	
+	public static int nbVisiteurs = 0;
+	public static int nbVisiteursMinute = 50;
 	public static int vitesse = 1;
 
 	
@@ -37,6 +39,21 @@ public class Controleur {
 		Controleur.vitesse=1000;
 		System.out.println(vitesse.equals("Rapide (ms)"));
 		youtube = new Youtube(this,m,confUtilisateurs);
+		Visiteur.youtube = youtube;
+		
+		new Thread(new Runnable() {
+		      public void run() {
+		    	while(true) {
+			    	lancerVisiteurs(youtube);
+			  		try {
+						Thread.sleep(60 * 1000 / Controleur.vitesse);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    	}
+		      }
+		}).start();
 		
 		while(true){
 		this.afficherModele(youtube.infosPlateformes());
@@ -46,6 +63,15 @@ public class Controleur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+	}
+	
+	public void lancerVisiteurs(Youtube youtube) {
+		for (int i = 1; i <= this.nbVisiteursMinute; i++) {
+			Visiteur V = new Visiteur();
+			nbVisiteurs ++;
+			V.setName("Visiteur" + nbVisiteurs);
+			m.doAction(KernelAction.LAUNCH_AGENT, V, true); //launch a new agent with a GUI
 		}
 	}
 	

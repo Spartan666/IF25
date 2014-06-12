@@ -161,7 +161,7 @@ public class Comportement extends Thread {
 				}
 			}
 	
-			visionneur.mettrePause(1000);		
+			visionneur.mettrePause(5);		
 			video.addVue();
 			visionneur.addVideoVue(video); //Ajoute la video à la liste des videos vues
 		}
