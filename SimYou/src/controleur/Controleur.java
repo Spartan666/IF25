@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,19 +50,28 @@ public class Controleur {
 	}
 	
 	public void afficherModele(HashMap donnees){
-		this.fenetre.setContentPane(new PanelSimulationCours(donnees));
+		this.fenetre.setContentPane(new PanelSimulationCours(this,donnees));
 		this.fenetre.validate();
 		this.fenetre.repaint();
 	}
 	
-	public void SauvegarderModele(String chemin){
-		m.doAction(KernelAction.KILL_AGENT);
-		try
-		{ FileWriter lu = new FileWriter(chemin);
-		   BufferedWriter out = new BufferedWriter(lu);
-		   out.write(youtube.infosPlateformes().toString()); //
-		   out.close(); 
-		 } catch (IOException er) {;}
+	public Fenetre getFenetre() {
+		return fenetre;
+	}
+
+
+
+
+	public void SauvegarderModele(File f){
+		 try
+		 {
+		     FileWriter fw = new FileWriter (f);
+		     fw.write(getYoutubeInfos().toString());
+		     fw.close();
+		 }
+		 catch(Exception e){};
+		 int code = 0;
+		 System.exit(code);
 	}
 	
 	

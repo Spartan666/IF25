@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import controleur.Controleur;
 import javax.swing.JTable;
+import javax.swing.plaf.FileChooserUI;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -25,9 +26,9 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public PanelSimulationCours(HashMap donnees) {
+	public PanelSimulationCours(Controleur controleur,HashMap donnees) {
 		setLayout(null);
-	
+			this.controleur=controleur;
 			//A: Codify map in a two dimensional array:
 			String[] columnNames = {"Key", "Value"};
 			Object[][] data = new Object[donnees.size()][2];
@@ -62,9 +63,11 @@ public class PanelSimulationCours extends JPanel implements ActionListener {
 			int userSelection = fileChooser.showSaveDialog(this);
 			 
 			if (userSelection == JFileChooser.APPROVE_OPTION) {
-			    File fileToSave = fileChooser.getSelectedFile();
-			    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
-			    controleur.SauvegarderModele(fileToSave.toString());
+			     File file = fileChooser.getSelectedFile();
+			    System.out.println("Save as file: " + file.getAbsolutePath());
+				    	  controleur.SauvegarderModele(file);
+				
+			   
 			}
 		}
 		
