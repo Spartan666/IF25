@@ -168,7 +168,8 @@ public abstract class Comportement {
 			visionneur.addVideoVue(video); //Ajoute la video à la liste des videos vues
 		}
 		else {
-			visionneur.getAgentLogger().info("Trop jeune pour la video");
+			visionneur.getAgentLogger().info("Trop jeune pour la video " + video.getTitre() + " Age requis : " + video.getAgeRequis());
+			visionneur.mettrePause(5);	
 		}
 	}
 	

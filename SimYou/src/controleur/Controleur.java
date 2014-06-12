@@ -305,10 +305,7 @@ public class Controleur {
 	
 	//public void AfficherInformations(int nbvideo, int nbcommentaire, int nblike, int nbdislike, int moyenneLike, int MaxLike, int MinLike,int moyenneCommentaire, int MaxCommentaire, int MinCommentaire, int nbVueTotal,int nbAbonnementMoyen,)
 	
-	public HashMap getYoutubeInfos(Class<?> comportement) {
-		return youtube.infosPlateformes(comportement);
-	}
-	
+
 	public Object[][] getTableauDonnees(){
 		return formaterDonneesTableaux(youtube.infosPlateformes(Comportement.class),youtube.infosPlateformes(ComportementLambda.class),youtube.infosPlateformes(ComportementObjecteur.class),
 				youtube.infosPlateformes(ComportementPosteur.class),youtube.infosPlateformes(ComportementFan.class),youtube.infosPlateformes(ComportementRapide.class),
