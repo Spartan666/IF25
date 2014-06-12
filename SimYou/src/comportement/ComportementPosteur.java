@@ -10,7 +10,7 @@ import modele.Video;
 import modele.Youtube;
 import modele.ListeCentresInteret;
 
-public class ComportementPosteur extends ComportementLambda {
+public class ComportementPosteur extends Comportement {
 
 	private int periodicitePostage; //Valeur entre 1 (postage pour chaque visionnage) et 10 (postage pour 10 visionnages)
 	

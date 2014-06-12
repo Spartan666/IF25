@@ -8,7 +8,7 @@ import modele.Utilisateur;
 import modele.Video;
 import modele.Youtube;
 
-public class ComportementFan extends ComportementLambda {
+public class ComportementFan extends Comportement {
 	
 	public ComportementFan(int probaVote, int probaLike, int probaCommenter, int bonusProbaCommenter,
 			int probaAbonner) {
