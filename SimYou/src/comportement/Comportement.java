@@ -196,11 +196,14 @@ public abstract class Comportement {
 	}
 	
 	public void abonner(Utilisateur visionneur, Chaine chaine) {
-		//Test si vidéo pas encore vue
-		if (!visionneur.getAbonnementsChaines().contains(chaine)) {	
-			chaine.addAbonne(visionneur);
-			visionneur.addAbonnementChaine(chaine);
-			visionneur.getAgentLogger().info("Abonnement a la chaine");
+		//Test si chaîne differente de celle du visionneur
+		if (!visionneur.getChaine().equals(chaine)) {
+		//Test si pas encore abonné
+			if (!visionneur.getAbonnementsChaines().contains(chaine)) {	
+				chaine.addAbonne(visionneur);
+				visionneur.addAbonnementChaine(chaine);
+				visionneur.getAgentLogger().info("Abonnement a la chaine");
+			}
 		}
 	}
 }
