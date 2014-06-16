@@ -34,6 +34,7 @@ public class Youtube {
 	private Controleur controleur;
 	private Madkit m;
 	
+	//Lancement des utilisateurs
 	public Youtube(Controleur controleur,Madkit m,ArrayList<Integer> confUtilisateurs){
 		Utilisateur.youtube=this;
 		 this.controleur=controleur;
@@ -136,6 +137,7 @@ public class Youtube {
 		}
 	}
 	
+	//Méthode de lancement des visiteurs (flot/min fixe)
 	public void lancerVisiteurs(int nbVisiteursMinute) {
 		for (int i = 1; i <= nbVisiteursMinute; i++) {
 			Visiteur V = new Visiteur();
@@ -160,6 +162,7 @@ public class Youtube {
 		this.utilisateurs.add(utilisateur);
 	}
 	
+	//Génération des statistiques
 	public HashMap infosPlateformes(Class<?> comportement){
 		HashMap<String, Double> infos= new HashMap<String, Double>();
 		

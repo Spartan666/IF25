@@ -20,12 +20,13 @@ public class Visiteur extends Agent {
 		nbinstance+=1;
 	}
 
-	
+	//Méthode appellée au lancement de l'agent
 	public void activate() {
 		this.logger.info("Visiteur en ligne");
 		pause(2000);
 	}
 	
+	//Méthode de vie de l'agent
 	public void live() {
 		// TODO Auto-generated method stub
 			int nbVisionnages = new Random().nextInt(3) + 1;
@@ -34,12 +35,13 @@ public class Visiteur extends Agent {
 			}
 	}
 	
+	//Méthode appellée à la mort de l'agent
 	public void end() {
 		// TODO Auto-generated method stub
 		this.logger.info("Visiteur hors ligne");
 	}
 
-	
+	//Méthode de sélection d'une vidéo à visionner
 	public void selectionnerVideo(Youtube youtube) {
 		ArrayList<Utilisateur> utilisateurs = youtube.getUtilisateurs();	//Sélection d'un propriétaire (de chaîne) aléatoire
 		int index = new Random().nextInt(utilisateurs.size());
@@ -67,6 +69,7 @@ public class Visiteur extends Agent {
 		}
 		else {
 			this.logger.info("Trop jeune pour la video");
+			pause(30);	
 		}
 	}
 }

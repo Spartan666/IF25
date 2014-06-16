@@ -25,7 +25,7 @@ public class ComportementFan extends Comportement {
 
 	public void selectionnerVideo(Utilisateur visionneur, Youtube youtube) {
 		ArrayList<Chaine> chainesAbonnees = visionneur.getAbonnementsChaines();
-		//Test si abonné à une ou plusieurs chaînes
+		//Test si visionneur abonné à une ou plusieurs chaînes
 		if (chainesAbonnees.size() != 0) {	
 			int index = new Random().nextInt(chainesAbonnees.size());	//Sélection d'une chaîne aléatoire.
 			Chaine chaine = chainesAbonnees.get(index);

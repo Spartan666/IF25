@@ -98,19 +98,23 @@ public class Utilisateur extends Agent{
 		return comportement;
 	}
 	
-	public AgentLogger getAgentLogger() {	//Permet d'utiliser le logger dans la classe Comportement
+	//Permet d'utiliser le logger dans la classe Comportement
+	public AgentLogger getAgentLogger() {	
 		return logger;
 	}
 
-	public void mettrePause(int duree) {	//Permet d'utiliser la méthode pause() dans la classe Comportement
+	//Permet d'utiliser la méthode pause() dans la classe Comportement
+	public void mettrePause(int duree) {	
 		pause(duree * 1000 / Controleur.vitesse);
 	}
 	
+	//Méthode appellée au lancement de l'agent
 	public void activate() {
 		this.logger.info("Je me connecte (Age : " + this.getAge() + " ans) " + this.getCentresInteret());
 		pause(2000);
 	}
 	
+	//Méthode de vie de l'agent
 	public void live() {
 		// TODO Auto-generated method stub
 		while(true){
@@ -118,6 +122,7 @@ public class Utilisateur extends Agent{
 		}
 	}
 	
+	//Méthode appellée à la mort de l'agent
 	public void end() {
 		// TODO Auto-generated method stub
 		this.logger.info("Je me déconnecte");

@@ -68,7 +68,7 @@ public class Controleur {
 		 m = new Madkit();
 	}
 	
-	
+	//Méthode de configuration de la vitesse, des visiteurs et de l'objet Youtube
 	public void configurerSimulation(ArrayList<Integer> confUtilisateurs,String vitesse) {
 		if(vitesse.equals("Rapide (ms)"))
 		Controleur.vitesse=1000;
@@ -77,6 +77,7 @@ public class Controleur {
 		youtube = new Youtube(this,m,confUtilisateurs);
 		Visiteur.youtube = youtube;
 		
+		//Lancement du flot de visiteurs toutes les minutes
 		new Thread(new Runnable() {
 		      public void run() {
 		    	while(true) {
@@ -90,7 +91,7 @@ public class Controleur {
 		    	}
 		      }
 		}).start();
-		this.afficherModele(this.getTableauDonnees());
+		this.afficherModele(this.getTableauDonnees());	//Affiche le tableau de statistiques
 	/*	while(true){
 			try {
 				Thread.sleep(3000);
@@ -102,7 +103,7 @@ public class Controleur {
 	}
 	
 
-	
+	//Affiche le tableau de statistiques
 	public void afficherModele(Object[][] tableauxDonnees){
 		this.fenetre.setContentPane(new PanelSimulationCours(this, tableauxDonnees));
 		this.fenetre.validate();
@@ -117,7 +118,7 @@ public class Controleur {
 
 
 
-
+	//Sauvegarde les statistiques
 	public void SauvegarderModele(File f){
 		 try
 		 {
@@ -133,6 +134,7 @@ public class Controleur {
 		 catch(Exception e){};
 	}
 	
+	//Sauvegarde le graphe d'abonnement des chaînes
 	public void SauvegarderGrapheChaines(File f){
 		Gexf gexf = new GexfImpl();
 		Calendar date = Calendar.getInstance();

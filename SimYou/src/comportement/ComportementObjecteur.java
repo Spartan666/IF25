@@ -45,6 +45,7 @@ public class ComportementObjecteur extends Comportement {
 		Video videoVisionnee = videos.get(index);		//Initialisation avec vidéo aléatoire si toutes les vidéos sont déjà vues.
 		
 		int maxNbDislikes = 0;
+		//Cherche la vidéo qui a le plus de dislikes
 		while (iteratorV.hasNext()) {
 			Video videoActuelle = iteratorV.next();
 			if (videoActuelle.getNbDislikes() > maxNbDislikes) {

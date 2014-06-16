@@ -41,7 +41,7 @@ public class ComportementPosteur extends Comportement {
 	public void selectionnerVideo(Utilisateur utilisateur, Youtube youtube) {
 		poster(utilisateur);
 		for (int i = 1; i <= periodicitePostage; i++) {
-			super.selectionnerVideo(utilisateur, youtube);
+			super.selectionnerVideo(utilisateur, youtube);	//Comportement lambda pour le visionnage
 		}
 	}
 	
@@ -51,11 +51,12 @@ public class ComportementPosteur extends Comportement {
 		int ageRequis = 13 + new Random().nextInt(6); //Age requis entre 13 et 18 ans
 		ArrayList<String> tags = new ArrayList<String>();
 		int nbTags = 1 + new Random().nextInt(3);
+		//Ajout d'un à 3 tags
 		for (int i = 1; i <= nbTags; i++) {
 		    tags.add(ListeCentresInteret.getRandomValue());
 		}
 		Video video = new Video("video" + chaine.getVideos().size() + utilisateur.getPrenom() + utilisateur.getNom(), "Blabla", duree, tags, chaine, ageRequis); //Création de la video
-		chaine.addVideo(video);
+		chaine.addVideo(video);	//Ajout à la chaîne
 		utilisateur.getAgentLogger().info("Video postee : " + video.getTitre() + " " + video.getDuree() + "s Age requis : " + video.getAgeRequis() + " ans " + video.getTags());
 		utilisateur.mettrePause(5);	
 	}

@@ -48,6 +48,7 @@ public class ComportementRapide extends Comportement {
 		//Test si sélection par nombre de vues ou de likes
 		if (test <= 50) {
 			int maxNbVues = 0;
+			//Cherche la vidéo qui le plus de vues
 			while (iteratorV.hasNext()) {
 				Video videoActuelle = iteratorV.next();
 				if (videoActuelle.getNbVues() > maxNbVues) {
@@ -61,6 +62,7 @@ public class ComportementRapide extends Comportement {
 		}
 		else {
 			int maxNbLikes = 0;
+			//Cherche la vidéo qui a le plus de likes
 			while (iteratorV.hasNext()) {
 				Video videoActuelle = iteratorV.next();
 				if (videoActuelle.getNbLikes() > maxNbLikes) {

@@ -105,17 +105,18 @@ public abstract class Comportement {
 		//Test si le visionneur a l'age requis
 		if (visionneur.getAge() >= video.getAgeRequis()) {
 			visionneur.getAgentLogger().info("Visionne une video : " + video.getTitre() + " " + video.getDuree() + "s");		//Simulation visionnage
-			visionneur.mettrePause(video.getDuree());
+			visionneur.mettrePause(video.getDuree()); //Pause de l'agent le temps de la vidéo
 			//Test des centres d'intérêt
 			ArrayList<String> centresInteret = visionneur.getCentresInteret();
 			ArrayList<String> tags = video.getTags();
 			int nbTagsCentresInteret = 0;
+			//Compte les centres d'intérêt communs avec les tags de la vidéo
 			for (int i = 0; i < centresInteret.size(); i++) {
 				if (tags.contains(centresInteret.get(i))) {
 					nbTagsCentresInteret ++;
 				}
 			}
-			int bonusProbaVote = nbTagsCentresInteret * ComportementLambda.coefficientBonusProbaVote;
+			int bonusProbaVote = nbTagsCentresInteret * ComportementLambda.coefficientBonusProbaVote;	//Pourcentage bonus pondéré de voter en fonction des centres d'intérêt 
 			
 			int proba = new Random().nextInt(70);
 			int probaBonus = 0;
@@ -169,11 +170,12 @@ public abstract class Comportement {
 		}
 		else {
 			visionneur.getAgentLogger().info("Trop jeune pour la video " + video.getTitre() + " Age requis : " + video.getAgeRequis());
-			visionneur.mettrePause(5);	
+			visionneur.mettrePause(30);	
 		}
 	}
 	
 	public void liker(Utilisateur visionneur, Video video) {
+		//Test si vidéo déjà likée
 		if (!visionneur.getLikedVideos().contains(video)) {	
 			video.addLike();
 			visionneur.addLikedVideo(video);
@@ -182,6 +184,7 @@ public abstract class Comportement {
 	}
 	
 	public void disliker(Utilisateur visionneur, Video video) {
+		//Test si vidéo déjà dislikée
 		if (!visionneur.getDislikedVideos().contains(video)) {	
 			video.addDislike();
 			visionneur.addDislikedVideo(video);
