@@ -84,7 +84,7 @@ public class FenetreConfSuiveur extends JDialog implements ActionListener {
 		}
 		{
 			ProbaAbonner = new JTextField();
-			ProbaAbonner.setText("40");
+			ProbaAbonner.setText("80");
 			ProbaAbonner.setColumns(10);
 			ProbaAbonner.setBounds(37, 110, 86, 20);
 			contentPanel.add(ProbaAbonner);

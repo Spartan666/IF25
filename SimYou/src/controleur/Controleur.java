@@ -154,6 +154,8 @@ public class Controleur {
 		
 		Attribute attNom = (Attribute) attrList.createAttribute("0",AttributeType.STRING, "Nom");
 		Attribute attNbAbonne = (Attribute) attrList.createAttribute("1", AttributeType.INTEGER, "Nombre abonnes");
+		Attribute attNbVideos = (Attribute) attrList.createAttribute("2", AttributeType.INTEGER, "Nombre videos");
+
 		int max=1;
 		for(Utilisateur U:this.youtube.getUtilisateurs()){
 			if(U.getChaine().getAbonnes().size()>max)
@@ -167,7 +169,9 @@ public class Controleur {
 			.setSize((U.getChaine().getAbonnes().size()*100)/max)
 			.getAttributeValues()
 				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNom, U.getNom())
-				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNbAbonne, ""+U.getChaine().getAbonnes().size());
+				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNbAbonne, ""+U.getChaine().getAbonnes().size())
+				.addValue((it.uniroma1.dis.wiserver.gexf4j.core.data.Attribute) attNbVideos, ""+U.getChaine().getVideos().size());
+
 			if(U.getComportement() instanceof ComportementFan)
 				gephi.setColor(new ColorImpl(249, 0, 0));
 			if((U.getComportement() instanceof ComportementLambda))

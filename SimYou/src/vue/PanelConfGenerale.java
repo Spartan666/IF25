@@ -169,7 +169,7 @@ public class PanelConfGenerale extends JPanel implements ActionListener {
 		add(textField_4);
 		
 		JLabel lblComportementLambda = new JLabel("Comportement lambda");
-		lblComportementLambda.setBounds(10, 49, 123, 14);
+		lblComportementLambda.setBounds(10, 49, 189, 14);
 		add(lblComportementLambda);
 		
 		btnEditerLambda = new JButton("Editer");
